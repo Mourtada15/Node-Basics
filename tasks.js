@@ -83,6 +83,7 @@ function quit(){
   process.exit();
 }
 
+
 /**
  * Provide the user with the possible commands
  *
