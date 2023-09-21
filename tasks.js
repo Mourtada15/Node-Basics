@@ -90,7 +90,7 @@ function quit(){
  * @returns {void}
  */ 
 function help(){
-  console.log('Possible Commands: hello, quit, exit, help')
+  console.log('Possible Commands:\n -hello\n -quit\n -exit\n -help')
 }
 
 // The following line starts the application
