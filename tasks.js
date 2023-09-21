@@ -35,6 +35,7 @@ function startApp(name){
  */
 function onDataReceived(text) {
   const arg = text.split(' ')[0].trim();
+  const commandsList = ['hello', 'exit', 'quit', 'help', 'list'];
 
   if (text === 'exit\n' || text === 'quit\n') {
     quit();
@@ -44,6 +45,9 @@ function onDataReceived(text) {
   }
   else if (text === 'help\n'){
     help();
+  }
+  else if (text === 'list\n') {
+    list(commandsList);
   }
   else{
     unknownCommand(text);
@@ -93,5 +97,14 @@ function help(){
   console.log('Possible Commands:\n -hello\n -quit\n -exit\n -help')
 }
 
+
+/**
+ * 
+ *
+ * @returns {void}
+ */ 
+function list(commandsList){
+  console.log(commandsList)
+}
 // The following line starts the application
 startApp("Hassan Mourtada")
