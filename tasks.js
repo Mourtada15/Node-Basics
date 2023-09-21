@@ -36,6 +36,8 @@ function startApp(name){
 function onDataReceived(text) {
   const arg = text.split(' ')[0].trim();
   const commandsList = ['hello', 'exit', 'quit', 'help', 'list'];
+  const tasks = [];
+  const taskAdded = text.trim().substring(4); // Remove "add" from the text
 
   if (text === 'exit\n' || text === 'quit\n') {
     quit();
@@ -48,6 +50,14 @@ function onDataReceived(text) {
   }
   else if (text === 'list\n') {
     list(commandsList);
+  }
+  else if (arg === 'add'){
+    // Check if there are additional arguments (task description)
+    if (taskAdded) {
+      add(tasks, taskAdded);
+    } else {
+      console.log('Error');
+    }
   }
   else{
     unknownCommand(text);
@@ -76,18 +86,6 @@ function hello(text){
   console.log(text + '!')
 }
 
-
-/**
- * Exits the application
- *
- * @returns {void}
- */
-function quit(){
-  console.log('Quitting now, goodbye!')
-  process.exit();
-}
-
-
 /**
  * Provide the user with the possible commands
  *
@@ -106,5 +104,28 @@ function help(){
 function list(commandsList){
   console.log(commandsList)
 }
+
+
+/**
+ * 
+ *
+ * @returns {void}
+ */ 
+function add(tasks, taskAdded) {
+  tasks.push(taskAdded);
+  console.log(`Task "${taskAdded}" added.`);
+}
+
+
+/**
+ * Exits the application
+ *
+ * @returns {void}
+ */
+function quit(){
+  console.log('Quitting now, goodbye!')
+  process.exit();
+}
+
 // The following line starts the application
 startApp("Hassan Mourtada")
