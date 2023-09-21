@@ -37,7 +37,7 @@ function onDataReceived(text) {
   const arg = text.split(' ')[0].trim();
   const commandsList = ['hello', 'exit', 'quit', 'help', 'list'];
   const tasks = [];
-  const taskAdded = text.trim().substring(4); // Remove "add" from the text
+  const taskAdded = text.trim().substring(4);
 
   if (text === 'exit\n' || text === 'quit\n') {
     quit();
@@ -52,12 +52,14 @@ function onDataReceived(text) {
     list(commandsList);
   }
   else if (arg === 'add'){
-    // Check if there are additional arguments (task description)
     if (taskAdded) {
       add(tasks, taskAdded);
     } else {
       console.log('Error');
     }
+  }
+  else if (arg === 'remove'){
+    remove(tasks);
   }
   else{
     unknownCommand(text);
@@ -115,6 +117,11 @@ function add(tasks, taskAdded) {
   tasks.push(taskAdded);
   console.log(`Task "${taskAdded}" added.`);
 }
+
+function remove(tasks) {
+    const removedTask = tasks.pop();
+    console.log(removedTask);
+  }
 
 
 /**
