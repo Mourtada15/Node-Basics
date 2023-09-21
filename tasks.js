@@ -94,7 +94,7 @@ function hello(text){
  * @returns {void}
  */ 
 function help(){
-  console.log('Possible Commands:\n -hello\n -quit\n -exit\n -help')
+  console.log('Possible Commands:\n -hello\n -quit\n -exit\n -help\n -list\n -add\n -remove\n')
 }
 
 
