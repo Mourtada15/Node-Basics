@@ -34,33 +34,57 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  const arg = text.split(' ')[0].trim();
-  const commandsList = ['hello', 'exit', 'quit', 'help', 'list'];
-  const tasks = [];
-  const taskAdded = text.trim().substring(4);
+  // console.log(onDataReceived)
+  let clean = text.replace('\n', ' ').trim();
+  let command = clean.split(' ')[0];
+  let argument = clean.replace(command, '');
+  let tasks = ['Task1', 'Task2', 'Task3', 'task4'];
+  let addCommand = clean.split(' ')[0];
+  let addArgument = clean.replace(addCommand, '');
+  let removeCommand = clean.split(' ')[0];
+  let removeArgument = clean.replace(removeCommand, '');
 
   if (text === 'exit\n' || text === 'quit\n') {
     quit();
   }
-  else if(arg === 'hello'){
-    hello(text.replace('\n', ''));
+  else if(command === 'hello'){
+    hello(argument);
   }
-  else if (text === 'help\n'){
+  else if(text === 'help\n'){
     help();
   }
   else if (text === 'list\n') {
-    list(commandsList);
-  }
-  else if (arg === 'add'){
-    if (taskAdded) {
-      add(tasks, taskAdded);
-    } else {
-      console.log('Error');
+    for (let i = 0; i < tasks.length; i++) {
+      let order = `${i+1}-${tasks[i]}`;
+      list(order)
     }
   }
-  else if (arg === 'remove'){
-    remove(tasks);
+  else if (addCommand === 'add') {
+    if (addArgument !== '') {
+      tasks.push(addArgument);
+      console.log(tasks);
+    } else {
+      add(addArgument)
+    }
   }
+
+  else if (text === 'remove\n') {
+    tasks.pop()
+    console.log(tasks)
+  } else if (text === 'remove 1\n'){
+    tasks.shift()
+    console.log(tasks)
+  } else if (text === 'remove 2\n') {
+    tasks.splice(1, 1)
+    console.log(tasks)
+  } else if (removeCommand === 'remove') {
+    if (isNaN(removeArgument)) {
+      console.log('Enter a valid number please')
+    } else if (removeArgument !== 1 || removeArgument !== 2) {
+      console.log('This number does not exist');
+    }
+  }
+
   else{
     unknownCommand(text);
   }
@@ -84,44 +108,26 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(text){
-  console.log(text + '!')
+function hello(argument){
+  console.log(`hello${argument}!`)
 }
 
 /**
- * Provide the user with the possible commands
+ * Help
  *
  * @returns {void}
- */ 
+ */
 function help(){
-  console.log('Possible Commands:\n -hello\n -quit\n -exit\n -help\n -list\n -add\n -remove\n')
+  console.log('Pssible Commands:\n -hello\n -help\n -quit\n -exit\n -add\n -list\n -remove\n -remove 1\n -remove 2')
 }
 
-
-/**
- * 
- *
- * @returns {void}
- */ 
-function list(commandsList){
-  console.log(commandsList)
+function list(order){
+  console.log(order)
 }
 
-
-/**
- * 
- *
- * @returns {void}
- */ 
-function add(tasks, taskAdded) {
-  tasks.push(taskAdded);
-  console.log(`Task "${taskAdded}" added.`);
+function add(addArgument){
+  console.log('error')
 }
-
-function remove(tasks) {
-    const removedTask = tasks.pop();
-    console.log(removedTask);
-  }
 
 
 /**
