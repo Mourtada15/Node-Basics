@@ -43,6 +43,8 @@ function onDataReceived(text) {
   let addArgument = clean.replace(addCommand, '');
   let removeCommand = clean.split(' ')[0];
   let removeArgument = clean.replace(removeCommand, '');
+  let editCommand = clean.split(' ')[0];
+  let editArgument = clean.replace(editCommand, '');
 
   if (text === 'exit\n' || text === 'quit\n') {
     quit();
@@ -83,6 +85,16 @@ function onDataReceived(text) {
     } else if (removeArgument !== 1 || removeArgument !== 2) {
       console.log('This number does not exist');
     }
+  }
+
+  else if (clean === 'edit') {
+    edit(clean)
+  } else if (clean === 'edit new text') {
+    tasks[tasks.length - 1] = editArgument;
+    console.log(tasks)
+  } else if (clean === 'edit 1 new text') {
+    tasks[0] = editArgument;
+    console.log(tasks);
   }
 
   else{
@@ -126,7 +138,11 @@ function list(order){
 }
 
 function add(addArgument){
-  console.log('error')
+  console.error('error')
+}
+
+function edit(clean) {
+  console.error('error')
 }
 
 
